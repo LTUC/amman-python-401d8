@@ -1,0 +1,16 @@
+{% extends "base.html" %}
+
+{% block title %}Things | {{thing.name}} {% endblock %}
+
+{% block content %}
+
+<p>
+    Name: {{thing.name}}
+    <br>
+    Rate: {{thing.rating}}
+    <br>
+    Reviewer: {{thing.reviewer}}
+</p>
+
+
+{% endblock %}
