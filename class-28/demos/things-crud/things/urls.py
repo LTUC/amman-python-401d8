@@ -1,16 +1,15 @@
 from django.urls import path
-from .views import (
-    ThingCreateView,
-    ThingDeleteView,
-    ThingDetailView,
-    ThingListView,
-    ThingUpdateView,
-)
+from .views import (HomeView,
+                    ThingsCreateView,
+                    ThingsDetailView,
+                    ThingsUpdateView,
+                    ThingsDeleteView
+                    )
 
 urlpatterns = [
-    path("", ThingListView.as_view(), name="thing_list"),
-    path("<int:pk>/", ThingDetailView.as_view(), name="thing_detail"),
-    path("create/", ThingCreateView.as_view(), name="thing_create"),
-    path("<int:pk>/update/", ThingUpdateView.as_view(), name="thing_update"),
-    path("<int:pk>/delete/", ThingDeleteView.as_view(), name="thing_delete"),
+    path('', HomeView.as_view(), name = "home"),
+    path('create/', ThingsCreateView.as_view(), name = "create_thing"),
+    path('<int:pk>', ThingsDetailView.as_view(), name = "detail_thing"),
+    path('update/<int:pk>', ThingsUpdateView.as_view(), name = "update_thing"),
+    path('delete/<int:pk>', ThingsDeleteView.as_view(), name = "delete_thing"),
 ]

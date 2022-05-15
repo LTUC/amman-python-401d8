@@ -1,13 +1,21 @@
-{% extends 'base.html' %}
+{% extends "_base.html" %}
 
-{% block content %}
 
-<h1>Delete Thing</h1>
+{% block hero %}
+<section id="hero" class="d-flex align-items-center">
 
-<form action="" method="post">
-  {% csrf_token %}
-  <p>Do you really want to delete "{{ thing.name }}"?</p>
-  <input type="submit" value="OK">
-</form>
+    <div class="container" data-aos="zoom-out" data-aos-delay="100">
+      <div class="row">
+        <div class="col-xl-6">
+          <h1>{{thing.name}}</h1>
+          <h2>Do you want to delete this item ?</h2>
+          <form action="" method="POST">
+              {% csrf_token %}
+              <input type="submit" value="OK!" class="btn-get-started btn-danger">
+          </form>
+        </div>  
+      </div>
+    </div>
 
-{% endblock content %}
+  </section><!-- End Hero -->
+{% endblock %}

@@ -1,28 +1,74 @@
-from django.views.generic import ListView, DetailView, UpdateView, CreateView, DeleteView
-from django.urls import reverse_lazy
+from django.views.generic import ( ListView,
+                                   CreateView,
+                                   UpdateView,
+                                   DeleteView,
+                                   TemplateView,
+                                   DetailView,
+                                   View
+                                    )
+
+from django.views import render
 from .models import Thing
 
-class ThingListView(ListView):
-    template_name = "thing_list.html"
+
+
+class HomeView(TemplateView):
+    template_name = "home.html"
+    
+
+class ThingsListView(ListView):
+    template_name = "things_list.html"
     model = Thing
 
-class ThingDetailView(DetailView):
+class ThingsDetailView(DetailView):
     template_name = "thing_detail.html"
     model = Thing
 
-class ThingUpdateView(UpdateView):
-    template_name = "thing_update.html"
-    model = Thing
-    fields = ["name", "rating", "reviewer"]
 
-
-class ThingCreateView(CreateView):
+class ThingsCreateView(CreateView):
     template_name = "thing_create.html"
     model = Thing
-    fields = ["name", "rating", "reviewer"]
+    fields = ["name", "reviewer", "rating"]
 
 
-class ThingDeleteView(DeleteView):
+
+class ThingsUpdateView(UpdateView):
+    template_name = "thing_update.html"
+    model = Thing
+    fields = ["name", "rating"]
+
+class ThingsDeleteView(DeleteView):
     template_name = "thing_delete.html"
     model = Thing
-    success_url = reverse_lazy("thing_list")
+    success_url ='/'
+
+
+class MyCustomView(View):
+
+    queryset= Thing.objects.all
+    def get(self, request, *args, **kwargs):
+        pass
+
+    def post(self, request, *args, **kwargs):
+        data = request.data
+
+        my_thing={
+            "name" : data["name"],
+            "rating" : data["rating"],
+
+        }
+
+        my_object = Thing.objects.create(**my_thing)
+        my_object.save()
+
+        return render(request, "home.html", {})
+
+
+
+
+    def put(self, request, *args, **kwargs):
+        pass
+
+
+    def delete(self, request, *args, **kwargs):
+        pass
