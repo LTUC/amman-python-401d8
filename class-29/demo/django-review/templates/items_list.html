@@ -1,0 +1,25 @@
+{% extends "_base.html" %}
+
+{% block yahya %} Items list{% endblock %}
+
+
+{% block Anas %}
+<h2>Items List:</h2>
+<ul>
+    {% for item in bla_bla_list %}
+        <li>{{item.name}}</li>
+    {% endfor %}
+</ul>
+
+<h2>Meals List:</h2>
+<ul>
+    {% for meal in meals_list %}
+        <li>
+            {{meal.name}}
+        <br>
+        <a href="{{meal.get_absolute_url}}">Update</a>
+        </li>
+        
+    {% endfor %}
+</ul>
+{% endblock %}

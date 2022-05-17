@@ -7,12 +7,12 @@ from django.views.generic import ( ListView,
                                    View
                                     )
 
-from django.views import render
 from .models import Thing
 
 
 
-class HomeView(TemplateView):
+class HomeView(ListView):
+    model = Thing
     template_name = "home.html"
     
 
@@ -43,32 +43,29 @@ class ThingsDeleteView(DeleteView):
     success_url ='/'
 
 
-class MyCustomView(View):
+# class MyCustomView(View):
 
-    queryset= Thing.objects.all
-    def get(self, request, *args, **kwargs):
-        pass
+#     queryset= Thing.objects.all()
+#     def get(self, request, *args, **kwargs):
+#         pass
 
-    def post(self, request, *args, **kwargs):
-        data = request.data
+#     def post(self, request, *args, **kwargs):
+#         data = request.data
 
-        my_thing={
-            "name" : data["name"],
-            "rating" : data["rating"],
+#         my_thing={
+#             "name" : data["name"],
+#             "rating" : data["rating"],
 
-        }
+#         }
 
-        my_object = Thing.objects.create(**my_thing)
-        my_object.save()
+#         my_object = Thing.objects.create(**my_thing)
+#         my_object.save()
 
-        return render(request, "home.html", {})
+#         return render(request, "home.html", {})
 
-
-
-
-    def put(self, request, *args, **kwargs):
-        pass
+#     def put(self, request, *args, **kwargs):
+#         pass
 
 
-    def delete(self, request, *args, **kwargs):
-        pass
+#     def delete(self, request, *args, **kwargs):
+#         pass
